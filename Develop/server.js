@@ -14,8 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // routes to route files
-require('./routes/homeRoutes');
-require('./routes/api/apiRoutes');
+const homeRoute = require('./routes/homeRoutes');
+const apiRoute = require('./routes/api/apiRoutes');
+
+// Home routes
+app.use('/', homeRoute);
+// Api calls
+app.use('/api', apiRoute);
 
 // Start the server
 app.listen(PORT, () => {
