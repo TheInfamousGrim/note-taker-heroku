@@ -8,9 +8,9 @@ const createNote = (note) => {
     // Create a unique id for the note
     note.id = nanoid();
     // if there's no notes create a new array of notes otherwise use the notes data
-    const newNoteArr = { ...notes } || [];
+    const newNoteArr = notes || [];
     newNoteArr.push(note);
-    fs.writeFile('./data/db.json', JSON.stringify(newNoteArr), (err) => {
+    fs.writeFile('./db/db.json', JSON.stringify(newNoteArr), (err) => {
         if (err) throw err;
         console.log('Note has been added to JSON db!');
     });

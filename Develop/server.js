@@ -21,10 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 // Get express to create route for all the files in the 'public' folder
 app.use(express.static('public'));
 
+// Api routes
+app.use('/api', api);
 // Home page routes
 app.use('/', html);
-// Api routes
-// app.use('/api', api);
 
 // Start the server
 app.listen(PORT, () => {
