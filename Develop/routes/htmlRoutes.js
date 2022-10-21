@@ -2,10 +2,8 @@ const router = require('express').Router();
 const path = require('path');
 
 // Import our modular routers for /tips and /feedback
-const notesRouter = require('./apiRoutes');
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
-const app = express();
-
-app.use('/notes', notesRouter);
-
-module.exports = app;
+module.exports = router;
