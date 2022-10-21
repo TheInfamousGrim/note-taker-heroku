@@ -1,13 +1,17 @@
 // Dependencies
 const express = require('express');
 const path = require('path');
-const api = require('./routes/index');
+const { clog } = require('./middleware/clog');
+const api = require('./routes/htmlRoutes');
 
 // Creating environment variable port
 const PORT = process.env.PORT || 3001;
 
 // Use express app
 const app = express();
+
+// Import custom middleware, 'clog'
+app.use(clog);
 
 // Express app can parse JSON and urlencoded form data
 app.use(express.json());
