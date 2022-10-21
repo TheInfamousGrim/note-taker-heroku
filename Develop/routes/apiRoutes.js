@@ -20,7 +20,7 @@ router.post('/notes', (req, res) => {
 });
 
 // Delete a note by id from the db
-router.post('/notes/:id', (req, res) => {
+router.delete('/notes/:id', (req, res) => {
     deleteNote(req.params);
     res.json();
 });

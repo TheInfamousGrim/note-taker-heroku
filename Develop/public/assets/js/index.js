@@ -83,7 +83,10 @@ const handleNoteDelete = (e) => {
     e.stopPropagation();
 
     const note = e.target;
+    console.log(note.parentElement);
     const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+    console.log(noteId);
+    console.log(activeNote.id === noteId);
 
     if (activeNote.id === noteId) {
         activeNote = {};
@@ -119,6 +122,7 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
     const jsonNotes = await notes.json();
+    console.log(jsonNotes);
     if (window.location.pathname === '/notes') {
         noteList.forEach((el) => (el.innerHTML = ''));
     }
