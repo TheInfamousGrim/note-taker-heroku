@@ -1,26 +1,27 @@
 // Dependencies
 const express = require('express');
-
-// Use express app
-const app = express();
+const path = require('path');
+const api = require('./routes/index');
 
 // Creating environment variable port
 const PORT = process.env.PORT || 3001;
 
+// Use express app
+const app = express();
+
+// Express app can parse JSON and urlencoded form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api', api);
+
 // Get express to create route for all the files in the 'public' folder
 app.use(express.static('public'));
-// Express app can parse data
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
-// routes to route files
-const homeRoute = require('./routes/homeRoutes');
-const apiRoute = require('./routes/api/apiRoutes');
+// GET Route for the homepage
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/public/index.html')));
 
-// Home routes
-app.use('/', homeRoute);
-// Api calls
-app.use('/api', apiRoute);
+// GET Route for notes page
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, '/public/notes.html')));
 
 // Start the server
 app.listen(PORT, () => {
