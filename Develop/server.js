@@ -24,7 +24,7 @@ app.use(express.static('public'));
 // Home page routes
 app.use('/', html);
 // Api routes
-app.use('/api', api);
+// app.use('/api', api);
 
 // Start the server
 app.listen(PORT, () => {
