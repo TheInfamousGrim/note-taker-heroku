@@ -12,19 +12,19 @@ const createNote = (note) => {
     newNoteArr.push(note);
     fs.writeFile('./db/db.json', JSON.stringify(newNoteArr), (err) => {
         if (err) throw err;
-        console.info('Note has been added to JSON db!');
     });
+    console.info('Note has been added to JSON db!');
 };
 
 // Custom middleware that deletes a note
 const deleteNote = (note) => {
-    // filter the db to get rid of the note to be deleted
-    const filteredNotes = notes.filter((noteData) => noteData.id !== note.id);
-    // Save the updated data back to the db
-    fs.writeFileSync('./db/db.json', JSON.stringify(filteredNotes), (err) => {
-        if (err) throw err;
-        console.info('Note has been deleted from JSON db');
-    });
+    // Loop through notes array
+    for (let i = 0; i < notes.length; i++) {
+        // When selected note matches id in array delete note
+        if (notes[i].id === note.id) {
+            notes.splice(i, 1);
+        }
+    }
 };
 
 // Custom middleware that logs out the type and path of each request to the server
@@ -32,11 +32,15 @@ const clog = (req, res, next) => {
     const fgCyan = '\x1b[36m';
     switch (req.method) {
         case 'GET': {
-            console.info(`📗 ${fgCyan}${req.method} request to ${req.path}`);
+            console.info(`🧤 ${fgCyan}${req.method} request to ${req.path}`);
             break;
         }
         case 'POST': {
-            console.info(`📘 ${fgCyan}${req.method} request to ${req.path}`);
+            console.info(`📬 ${fgCyan}${req.method} request to ${req.path}`);
+            break;
+        }
+        case 'DELETE': {
+            console.info(`☠️ ${fgCyan}${req.method} request to ${req.path}`);
             break;
         }
         default:

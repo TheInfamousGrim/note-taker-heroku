@@ -93,7 +93,7 @@ const handleNoteDelete = (e) => {
     }
 
     deleteNote(noteId).then(() => {
-        setTimeout(getAndRenderNotes, 500);
+        getAndRenderNotes();
         renderActiveNote();
     });
 };
